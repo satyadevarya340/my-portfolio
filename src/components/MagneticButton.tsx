@@ -25,8 +25,8 @@ export function MagneticButton({
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-    const deltaX = (clientX - centerX) * 0.35;
-    const deltaY = (clientY - centerY) * 0.35;
+    const deltaX = (clientX - centerX) * 0.28;
+    const deltaY = (clientY - centerY) * 0.28;
     setPosition({ x: deltaX, y: deltaY });
   };
 
@@ -36,13 +36,13 @@ export function MagneticButton({
 
   const variantStyles = {
     primary:
-      'bg-gradient-to-r from-cyan-400 to-blue-500 text-dark-950 font-semibold shadow-glow-cyan hover:shadow-cyan-400/50',
+      'bg-brand-primary text-white font-semibold shadow-sm hover:bg-brand-dark hover:shadow-glow-green',
     secondary:
-      'bg-dark-900/80 hover:bg-dark-800 text-neutral-200 border border-white/10 hover:border-cyan-500/40 hover:text-white',
+      'bg-white text-text-primary border border-surface-border hover:border-brand-accent hover:bg-brand-softest hover:text-brand-dark shadow-sm',
     outline:
-      'bg-transparent text-cyan-400 border border-cyan-400/40 hover:bg-cyan-500/10 hover:border-cyan-400',
+      'bg-transparent text-brand-dark border border-brand-accent/40 hover:bg-brand-soft hover:border-brand-accent',
     glass:
-      'glass-panel text-neutral-200 hover:text-white hover:border-cyan-400/40',
+      'bg-white/80 backdrop-blur-md text-text-primary border border-surface-border hover:border-brand-accent hover:text-brand-primary',
   };
 
   const content = (
@@ -51,8 +51,8 @@ export function MagneticButton({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 350, damping: 20, mass: 0.1 }}
-      className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer select-none ${variantStyles[variant]} ${className}`}
+      transition={{ type: 'spring', stiffness: 350, damping: 22, mass: 0.1 }}
+      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer select-none ${variantStyles[variant]} ${className}`}
       onClick={onClick}
     >
       {children}

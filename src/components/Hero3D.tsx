@@ -5,105 +5,134 @@ import * as THREE from 'three';
 import { useMousePosition } from '../hooks/useMousePosition';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
-function CyberCore() {
-  const meshRef = useRef<THREE.Group>(null);
-  const innerRef = useRef<THREE.Mesh>(null);
+function CentralCore() {
+  const groupRef = useRef<THREE.Group>(null);
+  const innerSphereRef = useRef<THREE.Mesh>(null);
+  const shellRef = useRef<THREE.Mesh>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
+  const ring3Ref = useRef<THREE.Mesh>(null);
   const mouse = useMousePosition();
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    if (meshRef.current) {
-      // Smooth lerp rotation toward mouse position
-      meshRef.current.rotation.y = THREE.MathUtils.lerp(
-        meshRef.current.rotation.y,
-        mouse.normalizedX * 0.8 + time * 0.15,
-        0.05
+    if (groupRef.current) {
+      // Smooth lerp toward cursor
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        mouse.normalizedX * 0.6 + time * 0.12,
+        0.04
       );
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(
-        meshRef.current.rotation.x,
-        -mouse.normalizedY * 0.5 + Math.sin(time * 0.3) * 0.1,
-        0.05
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        -mouse.normalizedY * 0.4 + Math.sin(time * 0.25) * 0.08,
+        0.04
       );
     }
 
-    if (innerRef.current) {
-      innerRef.current.rotation.x = -time * 0.4;
-      innerRef.current.rotation.y = time * 0.3;
+    if (innerSphereRef.current) {
+      innerSphereRef.current.rotation.y = time * 0.3;
+      innerSphereRef.current.rotation.x = -time * 0.2;
+    }
+
+    if (shellRef.current) {
+      shellRef.current.rotation.x = time * 0.15;
+      shellRef.current.rotation.y = -time * 0.25;
     }
 
     if (ring1Ref.current) {
-      ring1Ref.current.rotation.z = time * 0.25;
-      ring1Ref.current.rotation.x = Math.PI / 4 + Math.sin(time * 0.2) * 0.2;
+      ring1Ref.current.rotation.z = time * 0.2;
+      ring1Ref.current.rotation.x = Math.PI / 3.5 + Math.sin(time * 0.2) * 0.15;
     }
 
     if (ring2Ref.current) {
-      ring2Ref.current.rotation.z = -time * 0.35;
-      ring2Ref.current.rotation.y = Math.PI / 3 + Math.cos(time * 0.25) * 0.2;
+      ring2Ref.current.rotation.z = -time * 0.28;
+      ring2Ref.current.rotation.y = Math.PI / 4 + Math.cos(time * 0.2) * 0.15;
+    }
+
+    if (ring3Ref.current) {
+      ring3Ref.current.rotation.x = time * 0.35;
+      ring3Ref.current.rotation.z = Math.sin(time * 0.15) * 0.3;
     }
   });
 
   return (
-    <group ref={meshRef}>
-      {/* Central Distorted Glowing Sphere Core */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.8}>
-        <Sphere args={[1.2, 64, 64]}>
+    <group ref={groupRef}>
+      {/* Central Glowing AI Sphere Core */}
+      <Float speed={2} rotationIntensity={0.4} floatIntensity={0.6}>
+        <Sphere ref={innerSphereRef} args={[1.35, 64, 64]}>
           <MeshDistortMaterial
-            color="#00F2FE"
+            color="#159B70"
             attach="material"
-            distort={0.35}
-            speed={2.2}
-            roughness={0.2}
-            metalness={0.85}
-            wireframe={false}
+            distort={0.3}
+            speed={2}
+            roughness={0.15}
+            metalness={0.8}
+            emissive="#0B6B50"
+            emissiveIntensity={0.6}
           />
         </Sphere>
       </Float>
 
-      {/* Outer Wireframe Icosahedron */}
-      <Icosahedron ref={innerRef} args={[1.7, 1]}>
+      {/* Outer Wireframe Geometric Shell */}
+      <Icosahedron ref={shellRef} args={[1.9, 1]}>
         <meshStandardMaterial
-          color="#7F00FF"
+          color="#00F2FE"
           wireframe
           transparent
           opacity={0.35}
-          emissive="#7F00FF"
+          emissive="#0B6B50"
           emissiveIntensity={0.4}
         />
       </Icosahedron>
 
-      {/* Orbiting Tech Ring 1 */}
-      <Torus ref={ring1Ref} args={[2.3, 0.025, 16, 100]}>
+      {/* Orbital Ring 1 - Emerald / Green */}
+      <Torus ref={ring1Ref} args={[2.5, 0.025, 16, 120]}>
         <meshStandardMaterial
-          color="#00F2FE"
-          emissive="#00F2FE"
-          emissiveIntensity={0.8}
+          color="#18A979"
+          emissive="#18A979"
+          emissiveIntensity={0.9}
           roughness={0.1}
         />
       </Torus>
 
-      {/* Orbiting Tech Ring 2 */}
-      <Torus ref={ring2Ref} args={[2.7, 0.02, 16, 100]}>
+      {/* Orbital Ring 2 - Blue Accent */}
+      <Torus ref={ring2Ref} args={[2.9, 0.02, 16, 120]}>
         <meshStandardMaterial
-          color="#E0C3FC"
-          emissive="#7F00FF"
+          color="#4F7CFF"
+          emissive="#4F7CFF"
+          emissiveIntensity={0.7}
+          roughness={0.2}
+        />
+      </Torus>
+
+      {/* Orbital Ring 3 - Purple Accent */}
+      <Torus ref={ring3Ref} args={[3.3, 0.018, 16, 120]}>
+        <meshStandardMaterial
+          color="#7C5CFF"
+          emissive="#7C5CFF"
           emissiveIntensity={0.6}
           roughness={0.2}
         />
       </Torus>
 
-      {/* Floating Satellites */}
-      <group position={[2.2, 1.2, 0.5]}>
-        <Octahedron args={[0.25, 0]}>
-          <meshStandardMaterial color="#00F5A0" emissive="#00F5A0" emissiveIntensity={0.6} wireframe />
+      {/* Floating Geometric Satellite Nodes */}
+      <group position={[2.6, 1.4, 0.6]}>
+        <Octahedron args={[0.26, 0]}>
+          <meshStandardMaterial color="#00F5A0" emissive="#00F5A0" emissiveIntensity={0.9} wireframe />
         </Octahedron>
       </group>
 
-      <group position={[-2.4, -1.0, 0.8]}>
-        <Octahedron args={[0.3, 0]}>
-          <meshStandardMaterial color="#00F2FE" emissive="#00F2FE" emissiveIntensity={0.6} wireframe />
+      <group position={[-2.7, -1.2, 0.8]}>
+        <Octahedron args={[0.28, 0]}>
+          <meshStandardMaterial color="#4F7CFF" emissive="#4F7CFF" emissiveIntensity={0.8} wireframe />
+        </Octahedron>
+      </group>
+
+      <group position={[0.8, -2.4, -0.9]}>
+        <Octahedron args={[0.22, 0]}>
+          <meshStandardMaterial color="#F5B83D" emissive="#F5B83D" emissiveIntensity={0.8} wireframe />
         </Octahedron>
       </group>
     </group>
@@ -114,29 +143,38 @@ export function Hero3D() {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <div className="w-full h-full relative flex items-center justify-center">
+    <div className="w-full h-full relative flex items-center justify-center pointer-events-none">
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
+        camera={{ position: [0, 0, 7.2], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
         dpr={isMobile ? [1, 1] : [1, 2]}
       >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#00F2FE" />
-        <pointLight position={[-10, -10, -5]} intensity={1.2} color="#7F00FF" />
-        <directionalLight position={[0, 5, 5]} intensity={0.8} />
+        <ambientLight intensity={0.7} />
+        <pointLight position={[10, 10, 10]} intensity={2.0} color="#18A979" />
+        <pointLight position={[-10, -10, -5]} intensity={1.6} color="#4F7CFF" />
+        <pointLight position={[0, -10, 5]} intensity={1.2} color="#7C5CFF" />
+        <directionalLight position={[0, 8, 5]} intensity={1.0} />
 
-        <CyberCore />
+        <CentralCore />
       </Canvas>
 
-      {/* Holographic HUD Overlay Elements floating near the 3D scene */}
-      <div className="absolute top-6 right-6 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-900/80 backdrop-blur-md border border-cyan-500/20 text-xs font-mono text-cyan-300">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-        <span>R3F // GLSL CORE ONLINE</span>
+      {/* Floating Technical HUD Badges in Space */}
+      <div className="absolute top-6 left-6 hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-darker/90 backdrop-blur-md border border-brand-accent/30 text-xs font-mono text-brand-light shadow-glow-green">
+        <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
+        <span>R3F // THREE.JS CORE ONLINE</span>
       </div>
 
-      <div className="absolute bottom-6 left-6 hidden md:flex flex-col gap-1 px-3 py-2 rounded-lg bg-dark-900/70 backdrop-blur-md border border-white/5 text-[11px] font-mono text-neutral-400">
-        <div className="text-cyan-400 font-semibold">CORE ARCHITECTURE</div>
-        <div>FASTAPI • LANGGRAPH • THREE.JS</div>
+      <div className="absolute top-6 right-6 hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-darker/90 backdrop-blur-md border border-accent-blue/30 text-xs font-mono text-accent-blue">
+        <span className="w-2 h-2 rounded-full bg-accent-blue" />
+        <span>FASTAPI &amp; LANGGRAPH</span>
+      </div>
+
+      <div className="absolute bottom-6 left-6 hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-darker/90 backdrop-blur-md border border-accent-purple/30 text-xs font-mono text-accent-purple">
+        <span>POSTGRESQL // VECTOR SEARCH</span>
+      </div>
+
+      <div className="absolute bottom-6 right-6 hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-darker/90 backdrop-blur-md border border-brand-accent/30 text-xs font-mono text-brand-light">
+        <span>WEBGL 60 FPS</span>
       </div>
     </div>
   );
