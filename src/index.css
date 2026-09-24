@@ -10,10 +10,10 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
-  background-color: #F8FAF8;
+  background-color: #07110E;
   color: #172033;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
@@ -26,7 +26,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1FAF6;
+  background: #07110E;
 }
 ::-webkit-scrollbar-thumb {
   background: #159B70;
@@ -36,12 +36,13 @@ body {
   background: #0B6B50;
 }
 
-/* SaaS Card Styles */
+/* Premium SaaS Card Styles */
 .saas-card {
-  background: #FFFFFF;
+  background-color: #FFFFFF !important;
+  color: #172033 !important;
   border: 1px solid #E2ECE6;
   border-radius: 1.25rem;
-  box-shadow: 0 2px 8px -2px rgba(16, 24, 40, 0.04), 0 4px 16px -4px rgba(16, 24, 40, 0.06);
+  box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.06), 0 1px 2px -1px rgba(16, 24, 40, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -51,27 +52,19 @@ body {
   transform: translateY(-2px);
 }
 
-/* Dark Hero Panels */
-.hero-dark-panel {
-  background: rgba(7, 17, 14, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(21, 155, 112, 0.2);
-}
-
 /* Subtle Technical Grid */
-.bg-tech-grid {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(21, 155, 112, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(21, 155, 112, 0.06) 1px, transparent 1px);
-}
-
 .bg-hero-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(21, 155, 112, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(21, 155, 112, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(21, 155, 112, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 155, 112, 0.1) 1px, transparent 1px);
+}
+
+.bg-light-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(7, 92, 70, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 92, 70, 0.04) 1px, transparent 1px);
 }
 
 /* Text Gradients */

@@ -35,7 +35,6 @@ const serviceIcons: Record<string, React.ElementType> = {
   Database
 };
 
-// Colorful badge/icon style accents for SaaS service cards
 const serviceCardAccents: Record<string, { iconBg: string; iconColor: string; borderHover: string }> = {
   'ai-systems': { iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600', borderHover: 'hover:border-emerald-300' },
   'backend-architecture': { iconBg: 'bg-blue-50', iconColor: 'text-blue-600', borderHover: 'hover:border-blue-300' },
@@ -49,23 +48,22 @@ export function Home() {
   return (
     <div className="w-full relative">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION (DARK FUTURISTIC 3D WITH CENTERED 3D OBJECT)              */}
+      {/* 1. HERO SECTION (DARK FUTURISTIC 3D WITH CENTERED 3D CORE)                */}
       {/* ========================================================================= */}
-      <section className="relative min-h-screen flex flex-col items-center justify-between pt-28 pb-16 px-6 sm:px-12 bg-brand-darker text-white overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-16 px-6 sm:px-12 bg-[#07110E] text-white overflow-hidden">
         {/* Subtle Background Grid */}
         <div className="absolute inset-0 bg-hero-grid opacity-30 pointer-events-none" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-80 pointer-events-none" />
 
         {/* Ambient Top Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10 my-auto">
+        <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10">
           {/* Status Pill */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-darkest/90 border border-brand-accent/30 text-brand-light font-mono text-xs mb-6 shadow-glow-green"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-darkest/90 border border-brand-accent/30 text-brand-light font-mono text-xs mb-4 shadow-glow-green"
           >
             <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
             <span>{personalConfig.status}</span>
@@ -86,33 +84,33 @@ export function Home() {
           </motion.h1>
 
           {/* ===================================================================== */}
-          {/* CENTRAL 3D CORE (POSITIONED IN CENTER AS REQUESTED IN DOC.MD)         */}
+          {/* CENTRAL 3D CORE                                                       */}
           {/* ===================================================================== */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.0, delay: 0.2 }}
-            className="w-full h-[360px] sm:h-[460px] lg:h-[520px] relative my-[-20px] sm:my-[-30px] z-0"
+            className="w-full h-[320px] sm:h-[400px] lg:h-[450px] relative my-2 z-0"
           >
             <Hero3D />
           </motion.div>
 
-          {/* Supporting Text */}
+          {/* Supporting Bio Text */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-sm sm:text-base lg:text-lg text-brand-soft/90 max-w-2xl mx-auto leading-relaxed font-sans mb-8 z-10"
+            className="text-sm sm:text-base lg:text-lg text-emerald-100/90 max-w-2xl mx-auto leading-relaxed font-sans mb-8 z-10"
           >
-            Hi, I'm <span className="text-white font-semibold">{personalConfig.name}</span>. {personalConfig.role}. Specializing in high-throughput FastAPI backends, LangGraph multi-agent architectures, and spatial 3D WebGL interfaces.
+            Hi, I'm <span className="text-white font-bold">{personalConfig.name}</span>. {personalConfig.role}. Specializing in high-throughput FastAPI backends, LangGraph multi-agent architectures, and spatial 3D WebGL interfaces.
           </motion.p>
 
-          {/* Hero CTAs */}
+          {/* Hero CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-10 z-10"
+            className="flex flex-wrap items-center justify-center gap-4 mb-8 z-10"
           >
             <Link to="/projects">
               <MagneticButton variant="primary">
@@ -133,7 +131,7 @@ export function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-white/10 font-mono text-xs text-brand-soft/70 z-10"
+            className="flex flex-wrap items-center justify-center gap-6 pt-5 border-t border-white/10 font-mono text-xs text-brand-soft/70 z-10"
           >
             <div className="flex items-center gap-2">
               <Terminal size={14} className="text-brand-accent" />
@@ -151,7 +149,7 @@ export function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="hidden sm:flex flex-col items-center gap-1.5 font-mono text-[11px] text-brand-soft/60 mt-4">
+        <div className="hidden sm:flex flex-col items-center gap-1.5 font-mono text-[11px] text-brand-soft/60 mt-6">
           <span>SCROLL TO EXPLORE</span>
           <ArrowDown size={14} className="text-brand-accent animate-bounce" />
         </div>
@@ -161,21 +159,21 @@ export function Home() {
       <Marquee />
 
       {/* ========================================================================= */}
-      {/* 3. INTRO / STORY & STATS SECTION (LIGHT PREMIUM SAAS SURFACES)            */}
+      {/* 3. INTRO / STORY & STATS SECTION (SOLID LIGHT SAAS SURFACE)               */}
       {/* ========================================================================= */}
-      <section className="py-24 sm:py-32 px-6 sm:px-12 bg-surface-bg border-b border-surface-border relative">
+      <section className="py-24 sm:py-32 px-6 sm:px-12 bg-[#F8FAF8] text-[#172033] border-b border-[#E2ECE6] relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
             <div className="lg:col-span-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-soft border border-brand-accent/25 text-brand-dark font-mono text-xs uppercase tracking-widest mb-4 font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E9F7F1] border border-[#159B70]/30 text-[#075C46] font-mono text-xs uppercase tracking-widest mb-4 font-semibold">
                 // SYSTEM PHILOSOPHY
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-text-primary tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#172033] tracking-tight leading-tight">
                 TURNING IDEAS INTO DIGITAL SYSTEMS.
               </h2>
             </div>
 
-            <div className="lg:col-span-7 flex flex-col gap-5 text-text-secondary text-base sm:text-lg leading-relaxed">
+            <div className="lg:col-span-7 flex flex-col gap-5 text-[#475467] text-base sm:text-lg leading-relaxed">
               <p>
                 I build backend systems, AI-powered applications, and interactive digital experiences. Modern software engineering demands more than boilerplate code—it requires rock-solid data integrity, sub-millisecond execution, and intuitive interfaces.
               </p>
@@ -186,7 +184,7 @@ export function Home() {
           </div>
 
           {/* Stats Metrics Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {personalConfig.stats.map((stat, idx) => (
               <motion.div
                 key={stat.label}
@@ -194,16 +192,16 @@ export function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="saas-card p-6 flex flex-col justify-between group"
+                className="bg-white p-6 sm:p-7 rounded-2xl border border-[#E2ECE6] shadow-sm hover:shadow-md hover:border-[#159B70]/40 transition-all flex flex-col justify-between group"
               >
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-brand-primary mb-2 group-hover:scale-105 transition-transform duration-200 origin-left">
+                <div className="text-4xl sm:text-5xl font-display font-extrabold text-[#075C46] mb-2 group-hover:scale-105 transition-transform duration-200 origin-left">
                   {stat.value}
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-text-primary mb-0.5">
+                  <div className="text-base font-bold text-[#172033] mb-1">
                     {stat.label}
                   </div>
-                  <div className="text-xs text-text-muted font-mono">
+                  <div className="text-xs text-[#667085] font-mono">
                     {stat.subtext}
                   </div>
                 </div>
@@ -214,9 +212,9 @@ export function Home() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. SERVICES / WHAT I BUILD (CLEAN SAAS CARDS WITH COLORFUL ACCENTS)        */}
+      {/* 4. SERVICES / WHAT I BUILD (CLEAN WHITE CARDS WITH COLORFUL ACCENTS)      */}
       {/* ========================================================================= */}
-      <section className="py-24 px-6 sm:px-12 bg-white border-b border-surface-border relative">
+      <section className="py-24 px-6 sm:px-12 bg-white text-[#172033] border-b border-[#E2ECE6] relative z-10">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             badge="CAPABILITIES"
@@ -228,9 +226,9 @@ export function Home() {
             {services.map((service, idx) => {
               const Icon = serviceIcons[service.icon] || Sparkles;
               const accent = serviceCardAccents[service.id] || {
-                iconBg: 'bg-brand-softest',
-                iconColor: 'text-brand-primary',
-                borderHover: 'hover:border-brand-accent',
+                iconBg: 'bg-emerald-50',
+                iconColor: 'text-emerald-600',
+                borderHover: 'hover:border-emerald-300',
               };
 
               return (
@@ -240,31 +238,31 @@ export function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`saas-card p-8 flex flex-col justify-between group ${accent.borderHover}`}
+                  className={`bg-white p-8 rounded-2xl border border-[#E2ECE6] shadow-sm hover:shadow-md flex flex-col justify-between group ${accent.borderHover} transition-all`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <span className="font-mono text-xs text-text-muted font-bold group-hover:text-brand-primary transition-colors">
+                      <span className="font-mono text-xs text-[#94A3B8] font-bold group-hover:text-[#075C46] transition-colors">
                         // {service.number}
                       </span>
-                      <div className={`w-12 h-12 rounded-xl ${accent.iconBg} flex items-center justify-center border border-surface-border group-hover:scale-105 transition-all`}>
+                      <div className={`w-12 h-12 rounded-xl ${accent.iconBg} flex items-center justify-center border border-slate-100 group-hover:scale-105 transition-all`}>
                         <Icon size={22} className={accent.iconColor} />
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-display font-bold text-text-primary mb-3 group-hover:text-brand-primary transition-colors">
+                    <h3 className="text-xl font-display font-bold text-[#172033] mb-3 group-hover:text-[#075C46] transition-colors">
                       {service.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed mb-6 font-sans">
+                    <p className="text-xs sm:text-sm text-[#475467] leading-relaxed mb-6 font-sans">
                       {service.description}
                     </p>
                   </div>
 
-                  <ul className="space-y-2 border-t border-surface-border pt-4">
+                  <ul className="space-y-2 border-t border-[#E2ECE6] pt-4">
                     {service.features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-2 text-xs font-mono text-text-secondary">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+                      <li key={feat} className="flex items-center gap-2 text-xs font-mono text-[#475467]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#159B70]" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -277,9 +275,9 @@ export function Home() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. FEATURED PROJECTS SHOWCASE (SAAS BROWSER MOCKUPS & 3D INSPECT)          */}
+      {/* 5. FEATURED PROJECTS SHOWCASE                                             */}
       {/* ========================================================================= */}
-      <section className="py-28 px-6 sm:px-12 bg-surface-bg border-b border-surface-border relative">
+      <section className="py-28 px-6 sm:px-12 bg-[#F8FAF8] text-[#172033] border-b border-[#E2ECE6] relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <SectionHeading
@@ -301,9 +299,9 @@ export function Home() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. SKILLS & TECHNICAL RADAR (SAAS DASHBOARD METRICS)                      */}
+      {/* 6. SKILLS & TECHNICAL RADAR                                               */}
       {/* ========================================================================= */}
-      <section className="py-24 px-6 sm:px-12 bg-white border-b border-surface-border relative">
+      <section className="py-24 px-6 sm:px-12 bg-white text-[#172033] border-b border-[#E2ECE6] relative z-10">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             badge="TECH RADAR"
@@ -319,7 +317,7 @@ export function Home() {
       {/* ========================================================================= */}
       {/* 7. METHODOLOGY / 5-STAGE PROCESS WORKFLOW                                 */}
       {/* ========================================================================= */}
-      <section className="py-28 px-6 sm:px-12 bg-surface-bg border-b border-surface-border relative">
+      <section className="py-28 px-6 sm:px-12 bg-[#F8FAF8] text-[#172033] border-b border-[#E2ECE6] relative z-10">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             badge="METHODOLOGY"
@@ -334,7 +332,7 @@ export function Home() {
       {/* ========================================================================= */}
       {/* 8. CONTACT SECTION (DARK / DEEP GREEN TRANSMISSION HUB)                   */}
       {/* ========================================================================= */}
-      <section className="py-28 px-6 sm:px-12 bg-brand-darker text-white relative overflow-hidden">
+      <section className="py-28 px-6 sm:px-12 bg-[#07110E] text-white relative overflow-hidden z-10">
         <div className="absolute inset-0 bg-hero-grid opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading
