@@ -13,17 +13,16 @@ import { Marquee } from '../components/Marquee';
 import { ContactForm } from '../components/ContactForm';
 import {
   ArrowRight,
-  ArrowDown,
-  Sparkles,
   Bot,
   Server,
   Workflow,
   Cloud,
   Database,
   Terminal,
+  Sparkles,
   Cpu,
   Layers,
-  CheckCircle2
+  Container,
 } from 'lucide-react';
 
 const serviceIcons: Record<string, React.ElementType> = {
@@ -35,106 +34,115 @@ const serviceIcons: Record<string, React.ElementType> = {
   Database
 };
 
+const techStackRow = [
+  { name: 'Python', icon: Terminal },
+  { name: 'FastAPI', icon: Server },
+  { name: 'PostgreSQL', icon: Database },
+  { name: 'Docker', icon: Container },
+  { name: 'AWS', icon: Cloud },
+  { name: 'LLM / RAG', icon: Cpu },
+];
+
 export function Home() {
   return (
     <div className="w-full relative">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 px-6 sm:px-12 overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <section className="relative min-h-[92vh] flex flex-col justify-between pt-32 sm:pt-36 pb-12 px-6 sm:px-12 overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto">
           {/* Left Hero Narrative */}
           <div className="lg:col-span-6 flex flex-col items-start z-10">
-            {/* Status Pill */}
+            {/* Eyebrow */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-lavender-300 text-accent-violet font-mono text-[11px] font-semibold mb-6 shadow-sm"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-lavender-300 text-accent-violet font-mono text-[11px] font-semibold tracking-wider uppercase mb-6 shadow-sm"
             >
-              <span className="w-2 h-2 rounded-full bg-accent-violet animate-pulse" />
-              <span>{personalConfig.status}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-violet" />
+              <span>AI &amp; BACKEND DEVELOPER</span>
             </motion.div>
 
-            {/* Main Hero Headline */}
+            {/* Main Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-[64px] font-display font-extrabold tracking-tight text-navy-900 leading-[1.08] mb-6"
+              className="text-4xl sm:text-6xl lg:text-[62px] font-display font-extrabold tracking-tight text-navy-900 leading-[1.08] mb-6"
             >
-              Building <br />
-              <span className="text-gradient-violet">Digital Systems</span> <br />
-              With Code + AI.
+              BUILDING DIGITAL <br />
+              <span className="text-gradient-violet">EXPERIENCES</span> <br />
+              WITH CODE + AI
             </motion.h1>
 
-            {/* Personal Intro */}
+            {/* Short & Clean Introduction */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg text-muted-text max-w-lg mb-8 leading-relaxed font-sans"
+              className="text-base sm:text-lg text-muted-text max-w-lg mb-9 leading-relaxed font-sans"
             >
-              Hi, I'm <span className="text-navy-900 font-semibold">{personalConfig.name}</span>. {personalConfig.role}. Engineering high-throughput FastAPI microservices, agentic workflows (LangGraph), and spatial 3D WebGL experiences.
+              Hi, I'm <span className="text-navy-900 font-semibold">{personalConfig.name}</span>. I build scalable backend systems, AI-powered applications and modern digital experiences.
             </motion.p>
 
-            {/* Hero CTAs */}
+            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 mb-10"
+              className="flex flex-wrap items-center gap-4"
             >
               <Link to="/projects">
                 <MagneticButton variant="primary">
-                  <span>EXPLORE MY WORK</span>
+                  <span>Explore My Work</span>
                   <ArrowRight size={14} />
                 </MagneticButton>
               </Link>
 
               <Link to="/contact">
                 <MagneticButton variant="secondary">
-                  <span>LET'S CONNECT</span>
+                  <span>Let's Connect</span>
                 </MagneticButton>
               </Link>
             </motion.div>
-
-            {/* Micro Highlights */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="flex flex-wrap items-center gap-5 pt-5 border-t border-lavender-200/80 font-mono text-[11px] text-muted-subtle"
-            >
-              <div className="flex items-center gap-1.5">
-                <Terminal size={13} className="text-accent-violet" />
-                <span>FASTAPI &amp; PYTHON</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Cpu size={13} className="text-accent-magenta" />
-                <span>LANGGRAPH AGENTS</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Sparkles size={13} className="text-accent-emerald" />
-                <span>THREE.JS &amp; R3F</span>
-              </div>
-            </motion.div>
           </div>
 
-          {/* Right 3D Interactive Architectural Visual */}
+          {/* Right 3D Abstract Geometric Sculpture */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.2 }}
-            className="lg:col-span-6 h-[420px] sm:h-[520px] lg:h-[580px] relative w-full"
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="lg:col-span-6 h-[380px] sm:h-[480px] lg:h-[540px] relative w-full"
           >
             <Hero3D />
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-1.5 font-mono text-[10px] text-muted-subtle">
-          <span>SCROLL TO EXPLORE</span>
-          <ArrowDown size={13} className="text-accent-violet animate-bounce" />
-        </div>
+        {/* Minimal Bottom Technology Row */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="max-w-7xl mx-auto w-full pt-10 mt-6 border-t border-lavender-200/70 flex flex-wrap items-center justify-between gap-6"
+        >
+          <div className="text-[11px] font-mono text-muted-subtle tracking-wider uppercase font-semibold">
+            CORE TECHNOLOGIES
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8">
+            {techStackRow.map((tech) => {
+              const Icon = tech.icon;
+              return (
+                <div
+                  key={tech.name}
+                  className="flex items-center gap-2 text-xs font-mono text-muted-text hover:text-navy-900 transition-colors group cursor-default"
+                >
+                  <Icon size={14} className="text-muted-subtle group-hover:text-accent-violet transition-colors" />
+                  <span className="font-medium">{tech.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
       </section>
 
       {/* 2. INFINITE MARQUEE */}
