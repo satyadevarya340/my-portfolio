@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { personalConfig } from '../data/config';
-import { Send, CheckCircle2, AlertCircle, Mail, MapPin, Globe, Sparkles, Terminal } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Mail, MapPin, Globe, Sparkles } from 'lucide-react';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ export function ContactForm() {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#18A979', '#0B6B50', '#4F7CFF', '#F5B83D'],
+        colors: ['#8E6BFF', '#B8A7FF', '#E66BFF', '#F4B7EA', '#F5B83D'],
       });
       setFormData({
         name: '',
@@ -55,66 +55,66 @@ export function ContactForm() {
         projectType: 'AI Application & Agents',
         message: '',
       });
-    }, 1200);
+    }, 1000);
   };
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-      {/* Left Contact Details & Telemetry */}
+      {/* Left Contact Coordinates */}
       <div className="lg:col-span-5 flex flex-col justify-between">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-soft/80 border border-brand-accent/30 text-brand-dark font-mono text-xs uppercase tracking-widest mb-4 font-semibold">
-            <Sparkles size={14} className="text-brand-accent" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lavender-100 border border-lavender-300 text-accent-violet font-mono text-[11px] font-semibold uppercase tracking-widest mb-4">
+            <Sparkles size={13} />
             <span>DIRECT CHANNELS</span>
           </div>
 
-          <h3 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight mb-4">
-            LET'S BUILD SOMETHING USEFUL.
+          <h3 className="text-3xl sm:text-4xl font-display font-extrabold text-navy-900 tracking-tight mb-4">
+            Let's build something useful together.
           </h3>
 
-          <p className="text-sm text-brand-soft/80 mb-8 leading-relaxed font-sans">
-            Have an engineering challenge, an ambitious AI project, or want to discuss backend architecture? Reach out directly or dispatch a message through the portal.
+          <p className="text-sm text-muted-text mb-8 leading-relaxed font-sans">
+            Have an engineering challenge, an ambitious AI project, or want to discuss architecture? Reach out directly or dispatch a transmission through the portal.
           </p>
 
           <div className="flex flex-col gap-3.5">
-            {/* Email */}
+            {/* Email Card */}
             <a
               href={`mailto:${personalConfig.email}`}
-              className="bg-brand-darker/90 hover:bg-brand-dark/40 border border-brand-accent/20 p-4 rounded-2xl flex items-center gap-4 group transition-all"
+              className="pearl-card p-4 rounded-2xl flex items-center gap-4 group hover:border-accent-violet shadow-card"
             >
-              <div className="w-10 h-10 rounded-xl bg-brand-darkest flex items-center justify-center border border-brand-accent/30 group-hover:border-brand-accent">
-                <Mail size={18} className="text-brand-light" />
+              <div className="w-10 h-10 rounded-xl bg-lavender-100 flex items-center justify-center border border-lavender-200 group-hover:bg-white group-hover:border-accent-violet/40 transition-all">
+                <Mail size={18} className="text-accent-violet" />
               </div>
               <div>
-                <div className="text-[11px] font-mono text-brand-soft/60">DIRECT EMAIL</div>
-                <div className="text-sm font-display font-bold text-white group-hover:text-brand-light transition-colors">
+                <div className="text-[10px] font-mono text-muted-subtle uppercase">DIRECT EMAIL</div>
+                <div className="text-sm font-display font-bold text-navy-900 group-hover:text-accent-violet transition-colors">
                   {personalConfig.email}
                 </div>
               </div>
             </a>
 
-            {/* Location */}
-            <div className="bg-brand-darker/90 border border-brand-accent/20 p-4 rounded-2xl flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-brand-darkest flex items-center justify-center border border-brand-accent/30">
-                <MapPin size={18} className="text-brand-light" />
+            {/* Location Card */}
+            <div className="pearl-card p-4 rounded-2xl flex items-center gap-4 shadow-card">
+              <div className="w-10 h-10 rounded-xl bg-lavender-100 flex items-center justify-center border border-lavender-200">
+                <MapPin size={18} className="text-emerald-600" />
               </div>
               <div>
-                <div className="text-[11px] font-mono text-brand-soft/60">LOCATION &amp; TIMEZONE</div>
-                <div className="text-sm font-display font-bold text-white">
+                <div className="text-[10px] font-mono text-muted-subtle uppercase">LOCATION &amp; TIMEZONE</div>
+                <div className="text-sm font-display font-bold text-navy-900">
                   {personalConfig.location} ({personalConfig.timezone})
                 </div>
               </div>
             </div>
 
-            {/* Availability Status */}
-            <div className="bg-brand-darker/90 border border-brand-accent/20 p-4 rounded-2xl flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-brand-darkest flex items-center justify-center border border-brand-accent/30">
-                <Globe size={18} className="text-brand-light" />
+            {/* Availability */}
+            <div className="pearl-card p-4 rounded-2xl flex items-center gap-4 shadow-card">
+              <div className="w-10 h-10 rounded-xl bg-lavender-100 flex items-center justify-center border border-lavender-200">
+                <Globe size={18} className="text-accent-violet" />
               </div>
               <div>
-                <div className="text-[11px] font-mono text-brand-soft/60">WORK STATUS</div>
-                <div className="text-sm font-display font-bold text-brand-light flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
+                <div className="text-[10px] font-mono text-muted-subtle uppercase">WORK STATUS</div>
+                <div className="text-sm font-display font-bold text-emerald-700 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                   {personalConfig.status}
                 </div>
               </div>
@@ -122,13 +122,13 @@ export function ContactForm() {
           </div>
         </div>
 
-        {/* GitHub & LinkedIn Links */}
-        <div className="mt-8 pt-6 border-t border-brand-accent/20 flex items-center gap-4">
+        {/* GitHub & LinkedIn links */}
+        <div className="mt-8 pt-6 border-t border-lavender-200 flex items-center gap-4">
           <a
             href={personalConfig.github}
             target="_blank"
             rel="noreferrer"
-            className="text-xs font-mono text-brand-soft/80 hover:text-white transition-colors"
+            className="text-xs font-mono font-semibold text-navy-900 hover:text-accent-violet transition-colors"
           >
             GITHUB ↗
           </a>
@@ -136,124 +136,117 @@ export function ContactForm() {
             href={personalConfig.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="text-xs font-mono text-brand-soft/80 hover:text-white transition-colors"
+            className="text-xs font-mono font-semibold text-navy-900 hover:text-accent-violet transition-colors"
           >
             LINKEDIN ↗
           </a>
         </div>
       </div>
 
-      {/* Right Contact Form Card */}
+      {/* Right Contact Form */}
       <div className="lg:col-span-7">
         <form
           onSubmit={handleSubmit}
-          className="bg-brand-darker/90 p-6 sm:p-8 rounded-3xl border border-brand-accent/30 relative shadow-2xl"
+          className="pearl-card p-6 sm:p-10 rounded-3xl border border-lavender-300 relative overflow-hidden shadow-pearl"
         >
-          <div className="flex items-center justify-between pb-4 mb-5 border-b border-brand-accent/20 font-mono text-xs text-brand-soft/70">
-            <span className="text-brand-light font-semibold">// SECURE TRANSMISSION DISPATCH</span>
-            <span>TLS ENCRYPTED</span>
+          <div className="flex items-center justify-between pb-4 mb-6 border-b border-lavender-200 font-mono text-xs text-muted-subtle">
+            <span className="text-accent-violet font-semibold">// DIRECT MESSAGE DISPATCH</span>
+            <span>ENCRYPTED</span>
           </div>
 
           <div className="space-y-4">
-            {/* Name */}
             <div>
-              <label className="block font-mono text-xs text-brand-soft/80 uppercase mb-1.5">
-                Your Name / Organization <span className="text-brand-accent">*</span>
+              <label className="block font-mono text-xs text-navy-900 uppercase font-semibold mb-1.5">
+                Your Name / Organization <span className="text-accent-violet">*</span>
               </label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Alex Vance"
-                className="w-full bg-brand-darkest/90 border border-brand-accent/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent font-sans"
+                className="w-full bg-lavender-50/60 border border-lavender-200 rounded-xl px-4 py-3 text-sm text-navy-900 placeholder-muted-subtle focus:outline-none focus:border-accent-violet focus:ring-2 focus:ring-accent-violet/20 transition-all font-sans"
               />
             </div>
 
-            {/* Email */}
             <div>
-              <label className="block font-mono text-xs text-brand-soft/80 uppercase mb-1.5">
-                Email Address <span className="text-brand-accent">*</span>
+              <label className="block font-mono text-xs text-navy-900 uppercase font-semibold mb-1.5">
+                Email Address <span className="text-accent-violet">*</span>
               </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="alex@company.com"
-                className="w-full bg-brand-darkest/90 border border-brand-accent/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent font-sans"
+                className="w-full bg-lavender-50/60 border border-lavender-200 rounded-xl px-4 py-3 text-sm text-navy-900 placeholder-muted-subtle focus:outline-none focus:border-accent-violet focus:ring-2 focus:ring-accent-violet/20 transition-all font-sans"
               />
             </div>
 
-            {/* Project Category */}
             <div>
-              <label className="block font-mono text-xs text-brand-soft/80 uppercase mb-1.5">
+              <label className="block font-mono text-xs text-navy-900 uppercase font-semibold mb-1.5">
                 Project Category
               </label>
               <select
                 value={formData.projectType}
                 onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                className="w-full bg-brand-darkest/90 border border-brand-accent/20 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent font-sans"
+                className="w-full bg-lavender-50/60 border border-lavender-200 rounded-xl px-4 py-3 text-sm text-navy-900 focus:outline-none focus:border-accent-violet focus:ring-2 focus:ring-accent-violet/20 transition-all font-sans"
               >
                 {projectTypes.map((type) => (
-                  <option key={type} value={type} className="bg-brand-darkest text-white">
+                  <option key={type} value={type} className="bg-white text-navy-900">
                     {type}
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Message */}
             <div>
-              <label className="block font-mono text-xs text-brand-soft/80 uppercase mb-1.5">
-                Project Details / Message <span className="text-brand-accent">*</span>
+              <label className="block font-mono text-xs text-navy-900 uppercase font-semibold mb-1.5">
+                Project Details / Message <span className="text-accent-violet">*</span>
               </label>
               <textarea
                 rows={4}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Tell me about the goals, timelines, and technical requirements..."
-                className="w-full bg-brand-darkest/90 border border-brand-accent/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent font-sans resize-none"
+                className="w-full bg-lavender-50/60 border border-lavender-200 rounded-xl px-4 py-3 text-sm text-navy-900 placeholder-muted-subtle focus:outline-none focus:border-accent-violet focus:ring-2 focus:ring-accent-violet/20 transition-all font-sans resize-none"
               />
             </div>
 
-            {/* Error Message */}
             {status === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-red-300 text-xs font-mono flex items-center gap-2"
+                className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-mono flex items-center gap-2"
               >
-                <AlertCircle size={16} />
+                <AlertCircle size={15} />
                 <span>{errorMessage}</span>
               </motion.div>
             )}
 
-            {/* Success Message */}
             {status === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono flex items-center gap-2"
+                className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono flex items-center gap-2"
               >
-                <CheckCircle2 size={16} />
+                <CheckCircle2 size={15} />
                 <span>Message transmitted successfully! I will respond within 24 hours.</span>
               </motion.div>
             )}
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="w-full py-3.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-display font-bold text-sm tracking-wide shadow-sm hover:shadow-glow-green transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-navy-900 text-white font-display font-bold text-xs tracking-wider uppercase hover:bg-navy-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
             >
               {status === 'sending' ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>TRANSMITTING...</span>
+                  <span>DISPATCHING...</span>
                 </>
               ) : (
                 <>
-                  <span>TRANSMIT MESSAGE</span>
-                  <Send size={16} />
+                  <span>DISPATCH MESSAGE</span>
+                  <Send size={14} />
                 </>
               )}
             </button>

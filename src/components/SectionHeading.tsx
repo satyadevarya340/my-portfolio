@@ -6,7 +6,6 @@ interface SectionHeadingProps {
   title: string;
   subtitle?: string;
   align?: 'left' | 'center' | 'right';
-  theme?: 'light' | 'dark';
   className?: string;
 }
 
@@ -15,7 +14,6 @@ export function SectionHeading({
   title,
   subtitle,
   align = 'left',
-  theme = 'light',
   className = '',
 }: SectionHeadingProps) {
   const alignmentClass =
@@ -25,8 +23,6 @@ export function SectionHeading({
       ? 'items-end text-right'
       : 'items-start text-left';
 
-  const isDark = theme === 'dark';
-
   return (
     <div className={`flex flex-col ${alignmentClass} mb-12 sm:mb-16 ${className}`}>
       {badge && (
@@ -35,13 +31,9 @@ export function SectionHeading({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full font-mono text-xs uppercase tracking-widest mb-4 font-semibold ${
-            isDark
-              ? 'bg-brand-darkest/90 border border-brand-accent/30 text-brand-light'
-              : 'bg-brand-soft border border-brand-accent/25 text-brand-dark'
-          }`}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lavender-100 border border-lavender-300/60 text-accent-violet font-mono text-[11px] font-semibold uppercase tracking-widest mb-4 shadow-sm"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-violet" />
           {badge}
         </motion.div>
       )}
@@ -51,9 +43,7 @@ export function SectionHeading({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className={`text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight max-w-3xl ${
-          isDark ? 'text-white' : 'text-text-primary'
-        }`}
+        className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-navy-900 leading-tight max-w-3xl"
       >
         {title}
       </motion.h2>
@@ -64,9 +54,7 @@ export function SectionHeading({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className={`text-base sm:text-lg max-w-2xl mt-4 leading-relaxed font-normal ${
-            isDark ? 'text-neutral-300' : 'text-text-secondary'
-          }`}
+          className="text-base sm:text-lg text-muted-text max-w-2xl mt-4 leading-relaxed font-normal"
         >
           {subtitle}
         </motion.p>

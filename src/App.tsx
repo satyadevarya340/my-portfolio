@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLenis } from './hooks/useLenis';
+import { Background3D } from './components/Background3D';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -27,11 +28,11 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <motion.main
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
+      initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, y: -15, filter: 'blur(4px)' }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="flex-grow w-full"
+      className="flex-grow"
     >
       {children}
     </motion.main>
@@ -65,9 +66,15 @@ export function App() {
 
   return (
     <Router>
-      <div className="relative min-h-screen flex flex-col bg-[#07110E] font-sans overflow-x-hidden">
-        {/* Cinematic Boot Loader */}
+      <div className="relative min-h-screen flex flex-col bg-dark-950 text-neutral-100 font-sans overflow-x-hidden select-none sm:select-auto">
+        {/* Cinematic Initial Boot Loader */}
         {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+
+        {/* Global Three.js Particle Background */}
+        <Background3D intensity={0.8} />
+
+        {/* Noise overlay texture */}
+        <div className="noise-overlay" />
 
         {/* Desktop Magnetic Custom Cursor */}
         <CustomCursor />

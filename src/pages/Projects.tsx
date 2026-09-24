@@ -4,7 +4,7 @@ import { projects, Project } from '../data/projects';
 import { SectionHeading } from '../components/SectionHeading';
 import { Project3DModal } from '../components/Project3DModal';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Box, Search, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Box, Search } from 'lucide-react';
 
 const categories = ['All', 'Backend Systems', 'AI & GenAI', 'Full Stack & 3D', 'Cloud & Automation'];
 
@@ -23,7 +23,7 @@ export function Projects() {
   });
 
   return (
-    <div className="w-full pt-32 pb-24 px-6 sm:px-12 bg-surface-bg min-h-screen">
+    <div className="w-full pt-32 pb-24 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           badge="PORTFOLIO ARCHIVES"
@@ -41,10 +41,10 @@ export function Projects() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-200 ${
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
                     isActive
-                      ? 'bg-brand-primary text-white font-semibold shadow-sm'
-                      : 'bg-white text-text-secondary hover:text-text-primary border border-surface-border shadow-sm'
+                      ? 'bg-navy-900 text-white shadow-sm'
+                      : 'bg-white text-muted-text hover:text-navy-900 border border-lavender-200 shadow-card'
                   }`}
                 >
                   {cat}
@@ -53,15 +53,15 @@ export function Projects() {
             })}
           </div>
 
-          {/* Search Input */}
+          {/* Search Box */}
           <div className="w-full md:w-72 relative">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-subtle" />
             <input
               type="text"
               placeholder="Search tech or project..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white border border-surface-border rounded-full pl-10 pr-4 py-2 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-brand-accent font-mono shadow-sm"
+              className="w-full bg-white border border-lavender-200 rounded-full pl-10 pr-4 py-2 text-xs text-navy-900 placeholder-muted-subtle focus:outline-none focus:border-accent-violet font-mono shadow-card"
             />
           </div>
         </div>
@@ -76,61 +76,49 @@ export function Projects() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="saas-card p-6 sm:p-8 flex flex-col justify-between group"
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="pearl-card p-6 sm:p-8 rounded-3xl border border-lavender-200 hover:border-accent-violet/40 transition-all group flex flex-col justify-between shadow-card"
                 data-cursor="view"
               >
                 <div>
-                  {/* Browser Mockup Image Frame */}
-                  <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-6 relative bg-brand-darkest border border-surface-border shadow-sm">
-                    {/* Browser window top bar */}
-                    <div className="bg-brand-darker px-3 py-2 flex items-center justify-between border-b border-white/10">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-accent-red opacity-80" />
-                        <span className="w-2 h-2 rounded-full bg-accent-amber opacity-80" />
-                        <span className="w-2 h-2 rounded-full bg-brand-accent opacity-80" />
-                      </div>
-                      <div className="text-[10px] font-mono text-neutral-400">
-                        {project.slug}.sys
-                      </div>
-                      <div className="w-6" />
-                    </div>
-
+                  {/* Image Container */}
+                  <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-6 relative bg-lavender-100 border border-lavender-200">
                     <img
                       src={project.coverImage}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent opacity-60" />
 
                     {/* 3D Inspect Button */}
                     <button
                       onClick={() => setSelected3DProject(project)}
-                      className="absolute top-10 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-darkest/90 hover:bg-brand-primary text-white backdrop-blur-md border border-brand-accent/40 text-xs font-mono font-semibold transition-all shadow-sm"
+                      className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-navy-900 text-navy-900 hover:text-white backdrop-blur-md border border-lavender-300 text-xs font-mono font-semibold transition-all shadow-sm"
                     >
-                      <Box size={13} className="text-brand-accent" />
+                      <Box size={13} className="text-accent-violet" />
                       <span>3D Space</span>
                     </button>
 
                     <div className="absolute bottom-3 left-3">
-                      <span className="font-mono text-[11px] text-white bg-brand-darker/90 px-2.5 py-1 rounded-full border border-white/10">
+                      <span className="font-mono text-[11px] text-navy-900 bg-white/95 px-2.5 py-1 rounded-full border border-lavender-200 shadow-sm font-semibold">
                         {project.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Header & Meta */}
-                  <div className="flex items-center justify-between font-mono text-xs text-text-muted mb-2">
-                    <span className="text-brand-primary font-bold">// {project.id}</span>
+                  <div className="flex items-center justify-between font-mono text-xs text-muted-subtle mb-2">
+                    <span className="text-accent-violet font-bold">// {project.id}</span>
                     <span>{project.year}</span>
                   </div>
 
                   <Link to={`/projects/${project.slug}`}>
-                    <h3 className="text-2xl font-display font-bold text-text-primary group-hover:text-brand-primary transition-colors mb-2">
+                    <h3 className="text-2xl font-display font-bold text-navy-900 group-hover:text-accent-violet transition-colors mb-2">
                       {project.title}
                     </h3>
                   </Link>
 
-                  <p className="text-xs sm:text-sm text-text-secondary mb-6 leading-relaxed font-sans line-clamp-3">
+                  <p className="text-xs sm:text-sm text-muted-text mb-6 leading-relaxed font-sans line-clamp-3">
                     {project.description}
                   </p>
 
@@ -138,7 +126,7 @@ export function Projects() {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-md bg-surface-subtle border border-surface-border text-xs font-mono text-text-primary"
+                        className="px-2.5 py-1 rounded-md bg-lavender-50 text-[11px] font-mono text-navy-800 border border-lavender-200"
                       >
                         {tech}
                       </span>
@@ -146,16 +134,16 @@ export function Projects() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-surface-border">
+                <div className="flex items-center justify-between pt-4 border-t border-lavender-100">
                   <Link
                     to={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-brand-primary hover:text-brand-dark transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-navy-900 hover:text-accent-violet transition-colors"
                   >
                     <span>Read Case Study</span>
-                    <ArrowUpRight size={15} />
+                    <ArrowUpRight size={14} className="text-accent-violet" />
                   </Link>
 
-                  <span className="text-xs font-mono text-text-muted">
+                  <span className="text-xs font-mono text-muted-subtle">
                     {project.role}
                   </span>
                 </div>

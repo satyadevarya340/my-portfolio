@@ -21,10 +21,10 @@ function BrokenNode() {
     <Float speed={2} rotationIntensity={0.8} floatIntensity={1}>
       <Icosahedron ref={meshRef} args={[1.6, 1]}>
         <meshStandardMaterial
-          color="#EF5B63"
+          color="#8E6BFF"
           wireframe
-          emissive="#EF5B63"
-          emissiveIntensity={0.6}
+          emissive="#E66BFF"
+          emissiveIntensity={0.5}
         />
       </Icosahedron>
     </Float>
@@ -33,26 +33,26 @@ function BrokenNode() {
 
 export function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden pt-28 bg-surface-bg">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden pt-28">
       {/* Background 3D Broken Node */}
-      <div className="w-64 h-64 relative mb-4">
+      <div className="w-72 h-72 relative mb-6">
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <ambientLight intensity={0.6} />
-          <pointLight position={[10, 10, 10]} intensity={1.5} color="#EF5B63" />
+          <ambientLight intensity={0.8} />
+          <pointLight position={[10, 10, 10]} intensity={1.5} color="#8E6BFF" />
           <BrokenNode />
         </Canvas>
       </div>
 
-      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-accent-red font-mono text-xs uppercase tracking-widest mb-4 font-semibold">
+      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lavender-100 border border-lavender-300 text-accent-violet font-mono text-xs uppercase tracking-widest mb-4">
         <Terminal size={14} />
-        <span>ERROR // 404: SECTOR NOT FOUND</span>
+        <span>ERROR // 404: COORDINATE NOT FOUND</span>
       </div>
 
-      <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-text-primary tracking-tight mb-4">
-        THIS PAGE ESCAPED THE SYSTEM.
+      <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-navy-900 tracking-tight mb-4">
+        This page escaped the system.
       </h1>
 
-      <p className="text-sm sm:text-base text-text-secondary max-w-md mb-8 font-sans">
+      <p className="text-sm sm:text-base text-muted-text max-w-md mb-8 font-sans">
         The coordinate you are attempting to access does not exist in the spatial graph or has been archived.
       </p>
 

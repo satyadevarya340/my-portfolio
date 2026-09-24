@@ -60,67 +60,67 @@ export function CustomCursor() {
 
   const variants = {
     default: {
-      x: mousePosition.x - 6,
-      y: mousePosition.y - 6,
-      width: 12,
-      height: 12,
-      backgroundColor: '#00F2FE',
-      boxShadow: '0 0 15px rgba(0, 242, 254, 0.8)',
+      x: mousePosition.x - 5,
+      y: mousePosition.y - 5,
+      width: 10,
+      height: 10,
+      backgroundColor: '#8E6BFF',
+      boxShadow: '0 0 12px rgba(142, 107, 255, 0.6)',
       transition: { type: 'spring', stiffness: 500, damping: 28, mass: 0.2 },
     },
     hover: {
-      x: mousePosition.x - 24,
-      y: mousePosition.y - 24,
-      width: 48,
-      height: 48,
-      backgroundColor: 'rgba(0, 242, 254, 0.15)',
-      border: '1px solid rgba(0, 242, 254, 0.6)',
-      boxShadow: '0 0 25px rgba(0, 242, 254, 0.4)',
+      x: mousePosition.x - 20,
+      y: mousePosition.y - 20,
+      width: 40,
+      height: 40,
+      backgroundColor: 'rgba(142, 107, 255, 0.12)',
+      border: '1px solid rgba(142, 107, 255, 0.4)',
+      boxShadow: '0 0 20px rgba(142, 107, 255, 0.2)',
       transition: { type: 'spring', stiffness: 450, damping: 25, mass: 0.2 },
     },
     view: {
-      x: mousePosition.x - 36,
-      y: mousePosition.y - 36,
-      width: 72,
-      height: 72,
-      backgroundColor: 'rgba(0, 242, 254, 0.9)',
-      border: '2px solid #ffffff',
-      boxShadow: '0 0 35px rgba(0, 242, 254, 0.7)',
+      x: mousePosition.x - 32,
+      y: mousePosition.y - 32,
+      width: 64,
+      height: 64,
+      backgroundColor: 'rgba(17, 20, 43, 0.92)',
+      border: '1px solid rgba(142, 107, 255, 0.4)',
+      boxShadow: '0 10px 30px rgba(17, 20, 43, 0.25)',
+      color: '#FFFFFF',
       transition: { type: 'spring', stiffness: 400, damping: 24 },
     },
     drag: {
-      x: mousePosition.x - 36,
-      y: mousePosition.y - 36,
-      width: 72,
-      height: 72,
-      backgroundColor: 'rgba(127, 0, 255, 0.85)',
-      border: '2px solid #ffffff',
-      boxShadow: '0 0 35px rgba(127, 0, 255, 0.7)',
+      x: mousePosition.x - 32,
+      y: mousePosition.y - 32,
+      width: 64,
+      height: 64,
+      backgroundColor: 'rgba(142, 107, 255, 0.9)',
+      border: '1px solid #ffffff',
+      boxShadow: '0 10px 30px rgba(142, 107, 255, 0.35)',
+      color: '#FFFFFF',
       transition: { type: 'spring', stiffness: 400, damping: 24 },
     },
   };
 
   return (
     <>
-      {/* Primary Floating Cursor */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center font-mono font-bold text-xs text-dark-950 tracking-wider"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center font-mono font-bold text-[10px] tracking-wider"
         variants={variants}
         animate={cursorType}
       >
         {cursorText}
       </motion.div>
 
-      {/* Trailing Soft Aura */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9998] border border-cyan-400/20"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9998] border border-lavender-400/30"
         animate={{
-          x: mousePosition.x - 20,
-          y: mousePosition.y - 20,
-          width: 40,
-          height: 40,
+          x: mousePosition.x - 18,
+          y: mousePosition.y - 18,
+          width: 36,
+          height: 36,
         }}
-        transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.5 }}
+        transition={{ type: 'spring', stiffness: 220, damping: 22, mass: 0.4 }}
       />
     </>
   );

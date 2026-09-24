@@ -25,8 +25,8 @@ export function MagneticButton({
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-    const deltaX = (clientX - centerX) * 0.28;
-    const deltaY = (clientY - centerY) * 0.28;
+    const deltaX = (clientX - centerX) * 0.25;
+    const deltaY = (clientY - centerY) * 0.25;
     setPosition({ x: deltaX, y: deltaY });
   };
 
@@ -36,13 +36,13 @@ export function MagneticButton({
 
   const variantStyles = {
     primary:
-      'bg-brand-primary text-white font-semibold shadow-sm hover:bg-brand-dark hover:shadow-glow-green',
+      'bg-navy-900 text-white font-medium shadow-pearl hover:bg-navy-800 hover:shadow-glow-violet',
     secondary:
-      'bg-white text-text-primary border border-surface-border hover:border-brand-accent hover:bg-brand-softest hover:text-brand-dark shadow-sm',
+      'bg-white text-navy-900 border border-lavender-300/60 shadow-sm hover:border-accent-violet hover:bg-lavender-50',
     outline:
-      'bg-transparent text-brand-dark border border-brand-accent/40 hover:bg-brand-soft hover:border-brand-accent',
+      'bg-transparent text-navy-900 border border-lavender-400/40 hover:bg-white hover:border-accent-violet',
     glass:
-      'bg-white/80 backdrop-blur-md text-text-primary border border-surface-border hover:border-brand-accent hover:text-brand-primary',
+      'pearl-glass text-navy-900 hover:border-accent-violet',
   };
 
   const content = (
@@ -52,7 +52,7 @@ export function MagneticButton({
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: 'spring', stiffness: 350, damping: 22, mass: 0.1 }}
-      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer select-none ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 cursor-pointer select-none ${variantStyles[variant]} ${className}`}
       onClick={onClick}
     >
       {children}

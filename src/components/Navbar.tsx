@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { personalConfig } from '../data/config';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -20,7 +20,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -30,20 +30,18 @@ export function Navbar() {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const isDarkHero = location.pathname === '/' && !scrolled;
-
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 ${
           scrolled ? 'py-3' : 'py-5'
         } px-4 sm:px-8`}
       >
         <div
-          className={`w-full max-w-7xl flex items-center justify-between transition-all duration-300 rounded-2xl px-5 py-3 ${
-            isDarkHero
-              ? 'bg-[#07110E]/85 backdrop-blur-xl border border-white/10 text-white shadow-2xl'
-              : 'bg-white/95 backdrop-blur-xl border border-surface-border text-text-primary shadow-saas-lg'
+          className={`w-full max-w-7xl flex items-center justify-between transition-all duration-500 rounded-full px-5 py-2.5 ${
+            scrolled
+              ? 'pearl-glass shadow-pearl scale-[0.99]'
+              : 'bg-white/60 backdrop-blur-md border border-lavender-300/40'
           }`}
         >
           {/* Logo / Brand */}
@@ -51,29 +49,23 @@ export function Navbar() {
             to="/"
             className="flex items-center gap-3 group relative z-10"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-accent to-brand-dark flex items-center justify-center p-[1px] shadow-sm transition-transform duration-300 group-hover:scale-105">
-              <div className="w-full h-full bg-brand-darkest rounded-[11px] flex items-center justify-center text-brand-light font-mono font-bold text-xs">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-violet via-accent-magenta to-accent-softPink flex items-center justify-center p-[1px] shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-accent-violet font-display font-bold text-xs">
                 SA
               </div>
             </div>
             <div className="flex flex-col">
-              <span className={`font-display font-bold text-sm tracking-tight transition-colors ${
-                isDarkHero ? 'text-white' : 'text-[#172033]'
-              }`}>
+              <span className="font-display font-bold text-sm tracking-tight text-navy-900 group-hover:text-accent-violet transition-colors">
                 {personalConfig.name}
               </span>
-              <span className="font-mono text-[10px] text-brand-accent font-semibold tracking-wider">
-                AI &amp; BACKEND ARCHITECT
+              <span className="font-mono text-[9.5px] text-muted-subtle tracking-wider uppercase">
+                AI &amp; Backend Engineer
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden md:flex items-center gap-1 p-1 rounded-full border ${
-            isDarkHero
-              ? 'bg-black/40 border-white/10'
-              : 'bg-surface-subtle border-surface-border'
-          }`}>
+          <nav className="hidden md:flex items-center gap-1 bg-lavender-100/70 p-1 rounded-full border border-lavender-300/30">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -82,18 +74,14 @@ export function Navbar() {
                   to={link.path}
                   className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                     isActive
-                      ? 'text-white font-semibold'
-                      : isDarkHero
-                      ? 'text-neutral-300 hover:text-white'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'text-navy-900 font-semibold'
+                      : 'text-muted-text hover:text-navy-900 hover:bg-white/60'
                   }`}
                 >
                   {isActive && (
                     <motion.div
-                      layoutId="activeNavPill"
-                      className={`absolute inset-0 rounded-full -z-10 shadow-sm ${
-                        isDarkHero ? 'bg-brand-primary' : 'bg-brand-dark'
-                      }`}
+                      layoutId="activeNavIndicator"
+                      className="absolute inset-0 bg-white rounded-full -z-10 shadow-sm border border-lavender-300/50"
                       transition={{ type: 'spring', stiffness: 450, damping: 32 }}
                     />
                   )}
@@ -106,84 +94,78 @@ export function Navbar() {
           {/* Right Action Cluster */}
           <div className="flex items-center gap-3">
             {/* Status indicator */}
-            <div className={`hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono font-medium border ${
-              isDarkHero
-                ? 'bg-brand-darkest/90 border-brand-accent/30 text-brand-light'
-                : 'bg-brand-soft border-brand-accent/30 text-brand-dark'
-            }`}>
-              <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-emerald-500/20 text-[11px] font-mono text-emerald-700 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>{personalConfig.status}</span>
             </div>
 
-            {/* Let's Talk CTA */}
+            {/* Get in Touch CTA */}
             <Link
               to="/contact"
-              className={`hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-medium text-xs shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
-                isDarkHero
-                  ? 'bg-brand-accent text-white hover:bg-brand-primary'
-                  : 'bg-brand-dark text-white hover:bg-brand-primary'
-              }`}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-navy-900 text-white font-medium text-xs hover:bg-navy-800 transition-all duration-300 hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Let's Talk</span>
-              <ArrowUpRight size={14} />
+              <ArrowUpRight size={13} />
             </Link>
 
-            {/* Mobile Hamburger */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 rounded-xl border ${
-                isDarkHero
-                  ? 'bg-brand-darkest border-white/10 text-white'
-                  : 'bg-surface-subtle border-surface-border text-text-primary hover:text-brand-primary'
-              }`}
+              className="md:hidden p-2 rounded-full bg-white border border-lavender-300/40 text-navy-900 hover:text-accent-violet"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Full-Screen Mobile Menu Drawer */}
+      {/* Full-Screen Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
+            className="fixed inset-0 z-40 bg-bg-main/98 backdrop-blur-2xl flex flex-col justify-between p-8 pt-24 md:hidden"
           >
             <div className="flex flex-col gap-6">
-              <div className="font-mono text-xs text-brand-primary font-bold tracking-widest uppercase">
+              <div className="font-mono text-xs text-accent-violet tracking-widest uppercase">
                 // System Navigation
               </div>
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-4">
                 {navLinks.map((link, idx) => {
                   const isActive = location.pathname === link.path;
                   return (
-                    <Link
+                    <motion.div
                       key={link.name}
-                      to={link.path}
-                      className={`text-2xl font-display font-bold py-2 flex items-center justify-between border-b border-surface-border ${
-                        isActive ? 'text-brand-primary' : 'text-text-primary'
-                      }`}
+                      initial={{ opacity: 0, x: -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.04 * idx }}
                     >
-                      <span>{link.name}</span>
-                      <span className="font-mono text-xs text-text-muted">0{idx + 1}</span>
-                    </Link>
+                      <Link
+                        to={link.path}
+                        className={`text-2xl font-display font-bold flex items-center justify-between py-1 ${
+                          isActive ? 'text-accent-violet' : 'text-navy-900 hover:text-accent-violet'
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <span className="font-mono text-xs text-muted-subtle">0{idx + 1}</span>
+                      </Link>
+                    </motion.div>
                   );
                 })}
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 pt-6 border-t border-surface-border">
-              <div className="flex items-center gap-2 text-xs font-mono text-brand-dark font-medium">
-                <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+            <div className="flex flex-col gap-3 pt-6 border-t border-lavender-300/40">
+              <div className="flex items-center gap-2 text-xs font-mono text-emerald-700">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{personalConfig.status}</span>
               </div>
-              <div className="text-xs text-text-secondary">
+              <div className="text-xs text-muted-text">
                 {personalConfig.email}
               </div>
             </div>

@@ -3,33 +3,32 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
-interface ParticleFieldProps {
+interface ParticleDustProps {
   count: number;
-  intensity: number;
 }
 
-function ParticleField({ count, intensity }: ParticleFieldProps) {
+function ParticleDust({ count }: ParticleDustProps) {
   const pointsRef = useRef<THREE.Points>(null);
 
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
 
-    const color1 = new THREE.Color('#159B70'); // Green
-    const color2 = new THREE.Color('#4F7CFF'); // Blue
-    const color3 = new THREE.Color('#075C46'); // Deep green
+    const c1 = new THREE.Color('#8E6BFF'); // Violet
+    const c2 = new THREE.Color('#B8A7FF'); // Soft purple
+    const c3 = new THREE.Color('#F4B7EA'); // Soft pink
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 15;
+      pos[i * 3] = (Math.random() - 0.5) * 22;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 22;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
 
-      const mixed = Math.random();
-      const chosenColor = mixed < 0.5 ? color1 : mixed < 0.8 ? color2 : color3;
+      const mix = Math.random();
+      const chosen = mix < 0.4 ? c1 : mix < 0.7 ? c2 : c3;
 
-      col[i * 3] = chosenColor.r;
-      col[i * 3 + 1] = chosenColor.g;
-      col[i * 3 + 2] = chosenColor.b;
+      col[i * 3] = chosen.r;
+      col[i * 3 + 1] = chosen.g;
+      col[i * 3 + 2] = chosen.b;
     }
 
     return [pos, col];
@@ -38,8 +37,8 @@ function ParticleField({ count, intensity }: ParticleFieldProps) {
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = time * 0.02 * intensity;
-      pointsRef.current.rotation.x = Math.sin(time * 0.015) * 0.03 * intensity;
+      pointsRef.current.rotation.y = time * 0.015;
+      pointsRef.current.rotation.x = Math.sin(time * 0.01) * 0.02;
     }
   });
 
@@ -60,12 +59,11 @@ function ParticleField({ count, intensity }: ParticleFieldProps) {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
+        size={0.045}
         vertexColors
         transparent
-        opacity={0.35 * intensity}
+        opacity={0.35}
         sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
     </points>
@@ -74,18 +72,22 @@ function ParticleField({ count, intensity }: ParticleFieldProps) {
 
 export function Background3D({ intensity = 1.0 }: { intensity?: number }) {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const particleCount = isMobile ? 250 : 650;
+  const particleCount = isMobile ? 120 : 350;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-bg-main">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
+        camera={{ position: [0, 0, 7], fov: 55 }}
         gl={{ antialias: false, powerPreference: 'high-performance' }}
         dpr={isMobile ? [1, 1] : [1, 1.5]}
       >
-        <ambientLight intensity={0.3} />
-        <ParticleField count={particleCount} intensity={intensity} />
+        <ambientLight intensity={0.5} />
+        <ParticleDust count={particleCount} />
       </Canvas>
+
+      {/* Atmospheric radial gradients matching the reference images */}
+      <div className="absolute inset-0 bg-hero-glow pointer-events-none" />
+      <div className="absolute inset-0 bg-minimal-grid opacity-60 pointer-events-none" />
     </div>
   );
 }
